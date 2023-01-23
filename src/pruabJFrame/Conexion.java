@@ -2,6 +2,7 @@ package pruabJFrame;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,8 @@ public class Conexion {
 	private static final String BBDD = "eh_garden";
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
+	
+	PreparedStatement pst = null;
 
 	public Statement conectarBBDD (Connection con) throws SQLException {
 		
@@ -41,10 +44,16 @@ public class Conexion {
 		return null;
 	}
 	
-	public void addArbol(Statement st, String nombreComun, String nombreCientifico, String habitat, int altura, String origen) {
+	public void addArbol(Connection con , Arbol arbol) {
 		try {
-			st.execute("INSERT INTO arboles (nombre_comun,nombre_cientifico,habitat,altura,origen)"
-					+ " VALUES ('" + nombreComun +"','" + nombreCientifico + "','" + habitat + "'," + altura + ",'" + origen + "')");
+			pst = con.prepareStatement("INSERT INTO arboles (nombre_comun,nombre_cientifico,habitat,altura,origen)"
+					+ "VALUES (?,?,?,?,?)");
+			pst.setString(1, arbol.getNombreComun());
+			pst.setString(2, arbol.getNombreCientifico());
+			pst.setString(3, arbol.getHabitat());
+			pst.setInt(4, arbol.getAltura());
+			pst.setString(5, arbol.getOrigen());
+			pst.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,20 +108,28 @@ public class Conexion {
 		}
 	}
 	
-	public void modificarLineaString(int id, Statement st, String lineaNueva, String columna) {
+	public void modificarLineaString(int id, Connection con, String lineaNueva, String columna) {
 		//UPDATE `arboles` SET `nombre_comun` = 'aaaaaaa' WHERE `arboles`.`id` = 3;
 		try {
-			st.executeUpdate("UPDATE arboles SET " + columna + "= '" + lineaNueva + "' WHERE id=" + id );
+			pst = con.prepareStatement("UPDATE arboles SET ?=? WHERE id=?");
+			pst.setString(1, columna);
+			pst.setString(2, lineaNueva);
+			pst.setInt(3, id);
+			pst.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 	}
 	
-	public void modificarLineaInt(int id, Statement st, int lineaNueva, String columna) {
+	public void modificarLineaInt(int id, Connection con, int lineaNueva, String columna) {
 		try {
 			//UPDATE `arboles` SET `altura` = '1223' WHERE `arboles`.`id` = 3;
-			st.executeUpdate("UPDATE arboles SET " + columna + "= '" + lineaNueva + "' WHERE id=" + id );
+			pst = con.prepareStatement("UPDATE arboles SET ?=? WHERE id=?");
+			pst.setString(1, columna);
+			pst.setInt(2, lineaNueva);
+			pst.setInt(3, id);
+			pst.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
