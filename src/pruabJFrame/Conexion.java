@@ -154,20 +154,20 @@ public class Conexion {
 		
 	}
 	
-	public ArrayList<ArrayList<String>> devolverTodosLosDatos(Statement st, String tabla) {
-		ArrayList<ArrayList<String>> datos = new ArrayList<>();
+	public ArrayList<Arbol> devolverTodosLosDatos(Statement st, String tabla) {
+		ArrayList<Arbol> datos = new ArrayList<>();
 		ResultSet rs = this.buscarEnTabla(st, tabla);
 		try {
 			while(rs.next()) {
-				ArrayList<String> datosString = new ArrayList<>();
-				datosString.add(rs.getString(1));
-				datosString.add(rs.getString(2));
-				datosString.add(rs.getString(3));
-				datosString.add(rs.getString(4));
-				datosString.add(rs.getString(5));
-				datosString.add(rs.getString(6));
+				Arbol a = new Arbol();
+				a.setId(rs.getInt("id"));
+				a.setNombreComun(rs.getString("nombre_comun"));
+				a.setNombreCientifico(rs.getString("nombre_cientifico"));
+				a.setHabitat(rs.getString("habitat"));
+				a.setAltura(rs.getInt("altura"));
+				a.setOrigen(rs.getString("origen"));
 				
-				datos.add(datosString);
+				datos.add(a);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

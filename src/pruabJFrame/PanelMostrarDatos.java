@@ -23,18 +23,19 @@ public class PanelMostrarDatos extends JPanel {
 		lblDatos.setBounds(32, 69, 747, 473);
 		add(lblDatos);
 		
-		ArrayList<ArrayList<String>> datos = new Conexion().devolverTodosLosDatos(st, "arboles");
+		ArrayList<Arbol> datos = new Conexion().devolverTodosLosDatos(st, "arboles");
 		
 		String todosLosDatos = "<html><table>"
 				+ "<tr><td>ID</td><td>NOMBRE COMUN</td><td>NOMBRE CIENTIFICO</td><td>HABITAT</td><td>ALTURA</td><td>ORIGEN</td></tr>";
 		
-		for (ArrayList<String> arrayList : datos) {
-			todosLosDatos += "<tr>";
-			ArrayList<String> datosString = arrayList;
-			for (String s : datosString) {
-				todosLosDatos += "<td>" + s + "</td>";
-			}
-			todosLosDatos += "<tr>";
+		for (Arbol arbol : datos) {
+			todosLosDatos += "<tr>" + "<td>" + arbol.getId() + "</td>"
+					+ "<td>" + arbol.getNombreComun() + "</td>"
+					+ "<td>" + arbol.getNombreCientifico() + "</td>"
+					+ "<td>" + arbol.getHabitat() + "</td>"
+					+ "<td>" + arbol.getAltura() + "</td>"
+					+ "<td>" + arbol.getOrigen() + "</td>"
+					+ "</tr>"; 
 		}
 		
 
