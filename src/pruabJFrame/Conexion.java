@@ -15,7 +15,23 @@ public class Conexion {
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
 	
-	PreparedStatement pst = null;
+	public Connection establecerConexion(Connection con) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			return DriverManager.getConnection(IP + BBDD, USER, PASSWORD);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	public Statement conectarBBDD (Connection con) throws SQLException {
 		
@@ -46,7 +62,7 @@ public class Conexion {
 	
 	public void addArbol(Connection con , Arbol arbol) {
 		try {
-			pst = con.prepareStatement("INSERT INTO arboles (nombre_comun,nombre_cientifico,habitat,altura,origen)"
+			PreparedStatement pst = con.prepareStatement("INSERT INTO arboles (nombre_comun,nombre_cientifico,habitat,altura,origen)"
 					+ "VALUES (?,?,?,?,?)");
 			pst.setString(1, arbol.getNombreComun());
 			pst.setString(2, arbol.getNombreCientifico());
@@ -111,13 +127,14 @@ public class Conexion {
 	public void modificarLineaString(int id, Connection con, String lineaNueva, String columna) {
 		//UPDATE `arboles` SET `nombre_comun` = 'aaaaaaa' WHERE `arboles`.`id` = 3;
 		try {
-			pst = con.prepareStatement("UPDATE arboles SET ?=? WHERE id=?");
-			pst.setString(1, columna);
-			pst.setString(2, lineaNueva);
-			pst.setInt(3, id);
+			PreparedStatement pst = con.prepareStatement("UPDATE arboles SET " + columna + "=? WHERE id=?");
+			pst.setString(1, lineaNueva);
+			pst.setInt(2, id);
 			pst.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("NO FUNCIONA");
 		}
 		
 	}
@@ -125,13 +142,14 @@ public class Conexion {
 	public void modificarLineaInt(int id, Connection con, int lineaNueva, String columna) {
 		try {
 			//UPDATE `arboles` SET `altura` = '1223' WHERE `arboles`.`id` = 3;
-			pst = con.prepareStatement("UPDATE arboles SET ?=? WHERE id=?");
-			pst.setString(1, columna);
-			pst.setInt(2, lineaNueva);
-			pst.setInt(3, id);
+			PreparedStatement pst = con.prepareStatement("UPDATE arboles SET " + columna + "=? WHERE id=?");
+			pst.setInt(1, lineaNueva);
+			pst.setInt(22, id);
 			pst.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("NO FUNCIONA");
 		}
 		
 	}

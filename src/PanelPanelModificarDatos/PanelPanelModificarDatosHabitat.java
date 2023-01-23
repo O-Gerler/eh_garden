@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Statement;
 
 import javax.swing.JButton;
@@ -20,7 +21,7 @@ public class PanelPanelModificarDatosHabitat extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelPanelModificarDatosHabitat(Arbol arbol, Statement st, int id) {
+	public PanelPanelModificarDatosHabitat(Arbol arbol, int id, Connection con) {
 		setLayout(null);
 		
 		JLabel lblNombreActual = new JLabel("Habitat Antiguo");
@@ -42,7 +43,7 @@ public class PanelPanelModificarDatosHabitat extends JPanel {
 		JButton btnSi = new JButton("SI");
 		btnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Conexion().modificarLineaString(id, st, txtHabitat.getText(), "habitat");
+				new Conexion().modificarLineaString(id, con, txtHabitat.getText(), "habitat");
 			}
 		});
 		btnSi.setFont(new Font("Tahoma", Font.PLAIN, 15));

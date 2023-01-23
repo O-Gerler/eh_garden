@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -25,7 +26,7 @@ public class PanelPrincipal extends JFrame {
 	 * Create the frame.
 	 * @param st 
 	 */
-	public PanelPrincipal(Statement st) {
+	public PanelPrincipal(Statement st, Connection con) {
 		
 		setTitle("Menu");
 		setResizable(false);
@@ -52,7 +53,7 @@ public class PanelPrincipal extends JFrame {
 		JButton btnAddArbol = new JButton("Agregar Arbol");
 		btnAddArbol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelAgregarArbol panelAgregarArbol = new PanelAgregarArbol(st);
+				PanelAgregarArbol panelAgregarArbol = new PanelAgregarArbol(con);
 				
 				content.removeAll();
 				content.add(panelAgregarArbol);
@@ -86,7 +87,7 @@ public class PanelPrincipal extends JFrame {
 		btnModifyArbol.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnModifyArbol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelModificarDatos panelModificarDatos = new PanelModificarDatos(st);
+				PanelModificarDatos panelModificarDatos = new PanelModificarDatos(st, con);
 				
 				content.removeAll();
 				content.add(panelModificarDatos);

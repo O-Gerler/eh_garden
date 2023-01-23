@@ -3,6 +3,7 @@ package PanelPanelModificarDatos;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.sql.Connection;
 import java.sql.Statement;
 
 import javax.swing.JButton;
@@ -26,7 +27,7 @@ public class PanelPanelModificarDatosNombre extends JPanel {
 	 * Create the panel.
 	 * @param id 
 	 */
-	public PanelPanelModificarDatosNombre(Arbol arbol, Statement st, int id) {
+	public PanelPanelModificarDatosNombre(Arbol arbol, Connection con, int id) {
 		setLayout(null);
 		
 		JLabel lblNombreActual = new JLabel("Nombre ");
@@ -54,7 +55,7 @@ public class PanelPanelModificarDatosNombre extends JPanel {
 		JButton btnSi = new JButton("SI");
 		btnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Conexion().modificarLineaString(id, st, txtNombreNuevo.getText(), "nombre_comun");
+				new Conexion().modificarLineaString(id, con, txtNombreNuevo.getText(), "nombre_comun");
 			}
 		});
 		btnSi.setFont(new Font("Tahoma", Font.PLAIN, 15));

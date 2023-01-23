@@ -12,6 +12,7 @@ public class Main {
 		
 		Conexion conexion = new Conexion();
 		try {
+			con = conexion.establecerConexion(con);
 			st = conexion.conectarBBDD(con);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -20,7 +21,7 @@ public class Main {
 		
 		// TODO Auto-generated method stub
 		try {
-			InicioSesion frame = new InicioSesion(st);
+			InicioSesion frame = new InicioSesion(st, con);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

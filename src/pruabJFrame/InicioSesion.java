@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -30,9 +31,9 @@ public class InicioSesion extends JFrame{
 	 * Create the frame.
 	 * @param st 
 	 */
-	public InicioSesion(Statement st) {
+	public InicioSesion(Statement st,  Connection con) {
 		
-		iniciarComponente(st);
+		iniciarComponente(st, con);
 		
 		setTitle("Inicio de sesion");
 		setLocationRelativeTo(null);
@@ -44,7 +45,7 @@ public class InicioSesion extends JFrame{
 		return user;
 	}
 
-	private void iniciarComponente(Statement st) {
+	private void iniciarComponente(Statement st, Connection con) {
 		// TODO Auto-generated method stub
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 388, 233);
@@ -86,7 +87,7 @@ public class InicioSesion extends JFrame{
 					String password = String.valueOf(txtPassword.getPassword());
 					
 					if (new Conexion().buscarUsuario(username, password,new Conexion().buscarEnTabla(st, "usuarios"))) {
-						PanelPrincipal p2 = new PanelPrincipal(st);
+						PanelPrincipal p2 = new PanelPrincipal(st, con);
 						p2.setVisible(true);
 						p2.setLocationRelativeTo(null);
 						dispose();

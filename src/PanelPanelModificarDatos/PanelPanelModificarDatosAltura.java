@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Statement;
 
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ public class PanelPanelModificarDatosAltura extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelPanelModificarDatosAltura(Arbol arbol, Statement st, int id) {
+	public PanelPanelModificarDatosAltura(Arbol arbol, Connection con, int id) {
 		setLayout(null);
 		
 		JLabel lblNombreActual = new JLabel("Altura Antiguo");
@@ -46,7 +47,7 @@ public class PanelPanelModificarDatosAltura extends JPanel {
 		JButton btnSi = new JButton("SI");
 		btnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Conexion().modificarLineaInt(id, st, Integer.parseInt(txtAltura.getText()), "altura");
+				new Conexion().modificarLineaInt(id, con, Integer.parseInt(txtAltura.getText()), "altura");
 			}
 		});
 		btnSi.setFont(new Font("Tahoma", Font.PLAIN, 15));

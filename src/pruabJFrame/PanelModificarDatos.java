@@ -14,6 +14,7 @@ import PanelPanelModificarDatos.PanelPanelModificarDatosOrigen;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -31,7 +32,7 @@ public class PanelModificarDatos extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelModificarDatos(Statement st) {
+	public PanelModificarDatos(Statement st, Connection con) {
 		setLayout(null);
 		
 		JLabel lblErrorArbolNotFoud = new JLabel("");
@@ -79,7 +80,7 @@ public class PanelModificarDatos extends JPanel {
 		JButton btnCambiarNombre = new JButton("Nombre");
 		btnCambiarNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPanelModificarDatosNombre panelPanelModificarDatosNombre = new PanelPanelModificarDatosNombre(arbol, st, id);
+				PanelPanelModificarDatosNombre panelPanelModificarDatosNombre = new PanelPanelModificarDatosNombre(arbol, con, id);
 				
 				panel.removeAll();
 				panel.add(panelPanelModificarDatosNombre);
@@ -94,7 +95,7 @@ public class PanelModificarDatos extends JPanel {
 		JButton btnCambiarNombreCientifico = new JButton("NombreCientifico");
 		btnCambiarNombreCientifico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPanelModificarDatosNombreCientifico panelPanelModificarDatosNombreCientifico = new PanelPanelModificarDatosNombreCientifico(arbol, st, id);
+				PanelPanelModificarDatosNombreCientifico panelPanelModificarDatosNombreCientifico = new PanelPanelModificarDatosNombreCientifico(arbol, con, id);
 				
 				panel.removeAll();
 				panel.add(panelPanelModificarDatosNombreCientifico);
@@ -109,7 +110,7 @@ public class PanelModificarDatos extends JPanel {
 		JButton btnCambiarHabitat = new JButton("Habitat");
 		btnCambiarHabitat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPanelModificarDatosHabitat panelModificarDatosHabitat = new PanelPanelModificarDatosHabitat(arbol, st, id);
+				PanelPanelModificarDatosHabitat panelModificarDatosHabitat = new PanelPanelModificarDatosHabitat(arbol, id, con);
 				
 				panel.removeAll();
 				panel.add(panelModificarDatosHabitat);
@@ -124,7 +125,7 @@ public class PanelModificarDatos extends JPanel {
 		JButton btnCambiarAltura = new JButton("Altura");
 		btnCambiarAltura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPanelModificarDatosAltura panelPanelModificarDatosAltura = new PanelPanelModificarDatosAltura(arbol, st, id);
+				PanelPanelModificarDatosAltura panelPanelModificarDatosAltura = new PanelPanelModificarDatosAltura(arbol, con, id);
 				
 				panel.removeAll();
 				panel.add(panelPanelModificarDatosAltura);
@@ -139,7 +140,7 @@ public class PanelModificarDatos extends JPanel {
 		JButton btnCambiarOrigen = new JButton("Origen");
 		btnCambiarOrigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPanelModificarDatosOrigen panelPanelModificarDatosOrigen = new PanelPanelModificarDatosOrigen(arbol, st, id);
+				PanelPanelModificarDatosOrigen panelPanelModificarDatosOrigen = new PanelPanelModificarDatosOrigen(arbol, con, id);
 				
 				panel.removeAll();
 				panel.add(panelPanelModificarDatosOrigen);

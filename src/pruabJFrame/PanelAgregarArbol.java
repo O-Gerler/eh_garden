@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Statement;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 
 public class PanelAgregarArbol extends JPanel {
@@ -24,7 +24,7 @@ public class PanelAgregarArbol extends JPanel {
 	 * Create the panel.
 	 * @param st 
 	 */
-	public PanelAgregarArbol(Statement st) {
+	public PanelAgregarArbol(Connection con) {
 		setLayout(null);
 		
 		JLabel lblNombreComun = new JLabel("Nombre comun");
@@ -87,7 +87,14 @@ public class PanelAgregarArbol extends JPanel {
 				int altura = Integer.parseInt(txtAltura.getText());
 				String origen = txtOrigen.getText();
 				
-				new Conexion().addArbol(st, nombreComun, nombreCientifico, habitat, altura, origen);
+				Arbol arbol = new Arbol();
+				arbol.setNombreComun(nombreComun);
+				arbol.setNombreCientifico(nombreCientifico);
+				arbol.setHabitat(habitat);
+				arbol.setAltura(altura);
+				arbol.setOrigen(origen);
+				
+				new Conexion().addArbol(con, arbol);
 			}
 		});
 		btnEnviar.setBounds(564, 442, 96, 30);
